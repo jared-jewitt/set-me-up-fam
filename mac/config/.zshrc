@@ -6,8 +6,7 @@ export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
-export ZSH="/Users/jaredjewitt/.oh-my-zsh"
-
+export ZSH="$HOME/.oh-my-zsh"
 export NVM_DIR="$HOME/.nvm"
 export PYENV_ROOT="$HOME/.pyenv"
 
