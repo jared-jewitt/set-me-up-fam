@@ -17,9 +17,6 @@
   prune = true
 
 [alias]
-  # List available aliases.
-  aliases = !git config --get-regexp alias | sed -re "s/alias\\.(\\S*)\\s(.*)$/\\1 = \\2/g"
-
   # Edit last commit message.
   reword = commit --amend
 
@@ -30,4 +27,4 @@
   forget = reset --hard HEAD~1
 
   # Remove all file(s) from Git but not from disk.
-  nuke = rm --cache --
+  nuke = rm -r --cached .

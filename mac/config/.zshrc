@@ -7,8 +7,10 @@ export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
 export ZSH="$HOME/.oh-my-zsh"
-export NVM_DIR="$HOME/.nvm"
+export NODENV_ROOT="$HOME/.nodenv"
+export RBENV_ROOT="$HOME/.rbenv"
 export PYENV_ROOT="$HOME/.pyenv"
+export PATH="/opt/homebrew/bin:$PATH"
 
 ###############################################################################################
 # ZSH Settings and plugins
@@ -31,28 +33,38 @@ plugins=(
 # Runtime scripts
 ###############################################################################################
 
+# Nodenv, Rbenv, Pyenv
+eval "$(nodenv init -)"
+eval "$(rbenv init -)"
+eval "$(pyenv init --path)"
+
 # Oh My Zsh
 source $ZSH/oh-my-zsh.sh
 
-# NVM
-source $(brew --prefix nvm)/nvm.sh
-
-# Pyenv + Pyenv Virtualenv
-eval "$(pyenv init --path)"
-eval "$(pyenv virtualenv-init -)"
-
 # Powerlevel10k
-[[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
-if [[ -r "${XDG_CACHE_HOME:-"$HOME"/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-"$HOME"/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+source $HOME/.p10k.zsh
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 ###############################################################################################
 # Aliases
 ###############################################################################################
 
+# Docker
+if [ -x "$(command -v docker)" ]; then
+  alias dkr-nuke="docker system prune --all --volumes --force"
+  alias dkr-containers="docker container ls -a"
+  alias dkr-images="docker image ls -a"
+  alias dkr-volumes="docker volume ls"
+  alias dkr-networks="docker network ls"
+fi
+
 # ColorLS
 if [ -x "$(command -v colorls)" ]; then
-  alias ls="colorls"
-  alias la="colorls -al"
+  alias ls="colorls --dark"
 fi
+
+###############################################################################################
+# Auto-generated configuration
+###############################################################################################
